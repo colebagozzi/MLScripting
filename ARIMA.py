@@ -1,5 +1,6 @@
 import sys
 import os
+
 os.system(f"{sys.executable} -m pip install -U inline")
 os.system(f"{sys.executable} -m pip install -U matplotlib")
 os.system(f"{sys.executable} -m pip install -U statsmodels")
