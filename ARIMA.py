@@ -5,7 +5,6 @@ os.system(f"{sys.executable} -m pip install -U inline")
 os.system(f"{sys.executable} -m pip install -U matplotlib")
 os.system(f"{sys.executable} -m pip install -U statsmodels")
 
-
 import warnings                                  # `do not disturbe` mode
 warnings.filterwarnings('ignore')
 import numpy as np                               # vectors and matrices
