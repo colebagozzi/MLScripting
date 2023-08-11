@@ -29,28 +29,13 @@ client = pytd.Client(apikey='apikey', endpoint='https://api.treasuredata.com/', 
 
 def data():
 #    data = client.query("")
-    data = client.query("query")
-    a = pd.json_normalize(data, "data")
-    a.rename(columns={0: "move_in_date", 1: "total_count"}, inplace=True)
-    df = pd.DataFrame(a)
-    
-    if 'move_in_date' not in df.columns:
-        print("Column 'move_in_date' not found in the dataframe.")
-        print("Available columns:", df.columns)
-        return None
-    
-    df['move_in_date'] = pd.to_datetime(df['move_in_date'])
-    #df = df.loc[df['move_in_date'] >= '2020-01-01']
-    
-    df.sort_values('move_in_date', inplace=True)
-    
-    return df
+    #Get data
 
 def generate_forecast(df):
-    df.set_index('move_in_date', inplace=True)
+    df.set_index('Whatevr date column is', inplace=True)
 
     # Fit ARIMA model
-    model = ARIMA(df['total_count'], order=(1, 0, 0))
+    model = ARIMA(df['measure'], order=(1, 0, 0))
     model_fit = model.fit()
 
     # Predict next month's values
@@ -91,7 +76,7 @@ def generate_monthly_forecast(df):
 def generate_forecast_plot_multi_month(df):
     monthly_data = df.resample('M').sum()
 
-    model = ARIMA(monthly_data['total_count'][:-2], order=(1, 0, 0))
+    model = ARIMA(monthly_data['whatever column we are analyzing'][:-2], order=(1, 0, 0))
     model_fit = model.fit()
 
     start_index = len(monthly_data) - 12  # Number of months you want to go back (6 months + current month)
@@ -124,7 +109,7 @@ def generate_forecast_plot_multi_month(df):
 
 def generate_actual_vs_predicted(df):
     monthly_data = df.resample('M').sum()
-    model = ARIMA(monthly_data['total_count'][:-2], order=(1, 0, 0))
+    model = ARIMA(monthly_data['whatever we are analyzing'][:-2], order=(1, 0, 0))
     model_fit = model.fit()
 
     start_index = len(monthly_data) - 1  # Number of months you want to go back (6 months + current month) Was originally 12, now 1.
